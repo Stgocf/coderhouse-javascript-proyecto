@@ -102,6 +102,7 @@ function main(){
     solicitaNombre()
 
     while(boolMenuInicial){
+        boolServicios = true
         menuInicial()
         console.log('codigo sevricio '+codServicio)
         if (codServicio >= 1 && codServicio <= 5){
