@@ -60,7 +60,7 @@ function solicitaNombre(){
     let menuPrincipal = document.getElementById('ingresa-nombre')
 
     let mensajeBienvenida = document.createElement('h3')
-    mensajeBienvenida.innerText = 'Bienvenido! ingresa tu nombre completo'
+    mensajeBienvenida.innerText = 'Bienvenido! ingresa tu usuario'
     menuPrincipal.append(mensajeBienvenida)
 
     let formNombre = document.createElement('form')
@@ -234,6 +234,19 @@ function mostrarCarrito(){
     msjEvento.setAttribute("id", 'msjEvento');
     detalleMenu.append(msjEvento);
     actualizaTotalCompra()
+
+    let btnCompra = document.createElement('button')
+    btnCompra.setAttribute("id", 'btnCompra');
+    btnCompra.innerText = 'Comprar Ahora!';
+    btnCompra.onclick  = (e) => {
+        detalleMenu.innerHTML = ''
+        let msj = document.createElement('h2')
+        msj.innerText = 'Carrito comprado! esto borra el array de productos en carrito!'
+        carritoProductos = [] 
+        detalleMenu.append(msj)
+        e.preventDefault()
+    };
+    detalleMenu.append(btnCompra);
 
     /*
     let listaProductos = ''
