@@ -39,18 +39,19 @@ class producto{
     }
 }
 
-//array de productos disponibles en tienda
-let galeriaProductos = [
-    new producto('Curso Específico', 1, 10, 'curso'),
-    new producto('Curso Específico 2', 1, 10, 'curso'),
-    new producto('Curso Específico 3', 1, 10, 'curso'),
-    new producto('Suscripción Cursos Online', 5, 10, 'curso'),
-    new producto('Taller Principiante', 420, 10, 'taller'),
-    new producto('Taller Intermedio', 640, 10, 'taller'),
-    new producto('Taller Experto', 800, 10, 'taller'),
-    new producto('Consultoria de Proyectos', 120, 10, 'consultoria'),
-    new producto('Consultoria general TI', 120, 10, 'consultoria')
-]
+//array de productos disponibles en tiend
+let galeriaProductos = []
+
+fetch('files/productos.json', { mode: 'no-cors'} )
+    .then(response => {
+        console.log(response)
+        response.json()
+    }).then( data => {
+        data.forEach( (prod) => {
+            newProd = new producto(prod.nombre, prod.precio, prod.stock, prod.tipo)
+            galeriaProductos.append(newProd)
+        })
+    })
 
 //inicializamos el carrito de compra copmo array
 let carritoProductos = []
@@ -170,7 +171,7 @@ function subMenu(botonSeleccionado){
     }
 }
 
-function guardarLocal(nombre, carrito){
+function guardarLocal(){
     localStorage.setItem(nombreCliente, JSON.stringify(carritoProductos))
     //reiniciamos web
     let div = document.getElementById('ingresa-nombre')
@@ -207,6 +208,9 @@ function agregarProdACarito(nombreProd){
     carritoProductos.push(objProd)
     console.log('producto añadido: '+objProd.nombre)
     console.log('total productos'+carritoProductos)
+
+    //aactualizamos storage
+    guardarLocal()
 }
 
 

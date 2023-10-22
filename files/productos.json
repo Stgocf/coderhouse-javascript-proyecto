@@ -1,0 +1,56 @@
+[
+    { 
+        "nombre" : "Curso Específico",
+        "precio" : "1",
+        "stock" : "10",
+        "tipo" : "curso"
+    },
+    { 
+        "nombre" : "Curso Específico 2",
+        "precio" : "1",
+        "stock" : "10",
+        "tipo" : "curso"
+    }, 
+    { 
+        "nombre" : "Curso Específico 3",
+        "precio" : "1",
+        "stock" : "10",
+        "tipo" : "curso"
+    },
+    { 
+        "nombre" : "Suscripción Cursos Online",
+        "precio" : "5",
+        "stock" : "10",
+        "tipo" : "curso"
+    }, 
+    { 
+        "nombre" : "Taller Principiante",
+        "precio" : "420",
+        "stock" : "10",
+        "tipo" : "taller"
+    }, 
+    { 
+        "nombre" : "Taller Intermedio",
+        "precio" : "640",
+        "stock" : "10",
+        "tipo" : "taller"
+    }, 
+    { 
+        "nombre" : "Taller Experto",
+        "precio" : "800",
+        "stock" : "10",
+        "tipo" : "taller"
+    }, 
+    { 
+        "nombre" : "Consultoria de Proyectos",
+        "precio" : "120",
+        "stock" : "10",
+        "tipo" : "consultoria"
+    }, 
+    { 
+        "nombre" : "Consultoria general TI",
+        "precio" : "120",
+        "stock" : "10",
+        "tipo" : "consultoria"
+    }
+]
