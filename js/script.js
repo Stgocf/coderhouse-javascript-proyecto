@@ -243,11 +243,26 @@ function mostrarCarrito(){
     btnCompra.setAttribute("id", 'btnCompra');
     btnCompra.innerText = 'Comprar Ahora!';
     btnCompra.onclick  = (e) => {
-        detalleMenu.innerHTML = ''
-        let msj = document.createElement('h2')
-        msj.innerText = 'Carrito comprado! esto borra el array de productos en carrito!'
-        carritoProductos = [] 
-        detalleMenu.append(msj)
+        //detalleMenu.innerHTML = ''
+        //let msj = document.createElement('h2')
+        //msj.innerText = 'Carrito comprado! esto borra el array de productos en carrito!'
+        swal({
+            title: "Estás seguro de querer comprar los productos de tu carrito?",
+            text: "Comprar los productos los eliminará del carrito actual",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              swal("Gracias por confiar en nosotros, pronto te enviaremos los siguientes pasos!", {
+                icon: "success",
+              });
+              carritoProductos = [];
+            } else {
+              swal("Tu carrito sigue intacto!");
+            }
+          });
         e.preventDefault()
     };
     detalleMenu.append(btnCompra);
@@ -264,12 +279,25 @@ function mostrarCarrito(){
 function yaExisteEnCarrito(nombreProd){
     let prodarray = carritoProductos.filter( (prod) => prod.nombre === nombreProd )
     if (prodarray.length > 0) {
-        return '(PRODUCTO YA EXISTE EN CARRITO)'
+        return true
     }
     else {
-        return ''
+        return false
     }
 }
+
+function existeCarritoSwal(botonSeleccionado){
+    if ( yaExisteEnCarrito(botonSeleccionado) ){
+        msjEvento.innerText = 'producto '+botonSeleccionado+' ya existe en carrito!!'
+        swal('producto '+botonSeleccionado+' ya existe en carrito!!')
+    }
+    else {
+        agregarProdACarito(botonSeleccionado)
+        //msjEvento.innerText = 'producto '+botonSeleccionado+' agregado :) !!'
+        swal('producto '+botonSeleccionado+' agregado :) !!')
+    }
+}
+
 
 /* 
 --------------------------------------------------------------------------------------
@@ -303,14 +331,7 @@ function menuCursosOnline(){
         btn.onclick  = (e) => {
             let botonSeleccionado = btn.innerText
             console.log(botonSeleccionado)
-            let msjEvento = document.getElementById('msjEvento')
-            if ( yaExisteEnCarrito(botonSeleccionado) ){
-                msjEvento.innerText = 'producto '+botonSeleccionado+' ya existe en carrito!!'
-            }
-            else {
-                agregarProdACarito(botonSeleccionado)
-                msjEvento.innerText = 'producto '+botonSeleccionado+' agregado :) !!'
-            }
+            existeCarritoSwal(botonSeleccionado)
             e.preventDefault()
         };
         li.append(btn);
@@ -349,14 +370,7 @@ function menuTalleres(){
         btn.onclick  = (e) => {
             let botonSeleccionado = btn.innerText
             console.log(botonSeleccionado)
-            let msjEvento = document.getElementById('msjEvento')
-            if ( yaExisteEnCarrito(botonSeleccionado) ){
-                msjEvento.innerText = 'producto '+botonSeleccionado+' ya existe en carrito!!'
-            }
-            else {
-                agregarProdACarito(botonSeleccionado)
-                msjEvento.innerText = 'producto '+botonSeleccionado+' agregado :) !!'
-            }
+            existeCarritoSwal(botonSeleccionado)
             e.preventDefault()
         };
         li.append(btn);
@@ -395,14 +409,8 @@ function menuConsultoria(){
         btn.onclick  = (e) => {
             let botonSeleccionado = btn.innerText
             console.log(botonSeleccionado)
-            let msjEvento = document.getElementById('msjEvento')
-            if ( yaExisteEnCarrito(botonSeleccionado) ){
-                msjEvento.innerText = 'producto '+botonSeleccionado+' ya existe en carrito!!'
-            }
-            else {
-                agregarProdACarito(botonSeleccionado)
-                msjEvento.innerText = 'producto '+botonSeleccionado+' agregado :) !!'
-            }
+            //let msjEvento = document.getElementById('msjEvento')
+            existeCarritoSwal(botonSeleccionado)
             e.preventDefault()
         };
         li.append(btn);
