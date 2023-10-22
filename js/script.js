@@ -41,15 +41,12 @@ class producto{
 
 //array de productos disponibles en tiend
 let galeriaProductos = []
-
-fetch('files/productos.json', { mode: 'no-cors'} )
-    .then(response => {
-        console.log(response)
-        response.json()
-    }).then( data => {
+fetch('https://raw.githubusercontent.com/Stgocf/coderhouse-javascript-proyecto/main/files/productos.json')
+    .then(response => response.json())
+    .then( data => {
         data.forEach( (prod) => {
-            newProd = new producto(prod.nombre, prod.precio, prod.stock, prod.tipo)
-            galeriaProductos.append(newProd)
+            newProd = new producto(prod.nombre, parseInt(prod.precio), parseInt(prod.stock), prod.tipo)
+            galeriaProductos.push(newProd)
         })
     })
 
@@ -172,6 +169,7 @@ function subMenu(botonSeleccionado){
 }
 
 function guardarLocal(){
+
     localStorage.setItem(nombreCliente, JSON.stringify(carritoProductos))
     //reiniciamos web
     let div = document.getElementById('ingresa-nombre')
@@ -203,14 +201,16 @@ METODOS DEL CARRITO DE COMPRAS
 */
 function agregarProdACarito(nombreProd){
     //buscamos objeto
+    console.log('buscando objeto')
     let objProd = galeriaProductos.find( (prod) => prod.nombre === nombreProd) 
     //agregamos a carrito
+    console.log('producto encontrado, añadiendo a caarrito')
     carritoProductos.push(objProd)
     console.log('producto añadido: '+objProd.nombre)
     console.log('total productos'+carritoProductos)
 
     //aactualizamos storage
-    guardarLocal()
+    //guardarLocal()
 }
 
 
